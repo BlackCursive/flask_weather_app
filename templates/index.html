@@ -1,0 +1,145 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=" device-width", initial-scale=1.0">
+		<title>Weather App</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/weather.css') }}" />
+{% if api.cod == 200 %}
+		{% if api.weather[0].main == "Clouds" %}
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/clouds.jpg")}});
+			}
+		</style>
+
+		{% elif api.weather[0].main == "Clear" %}
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/clear.jpg")}});
+			}
+		</style>
+
+		{% elif api.weather[0].main == "Rain" %}
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/rain.jpg")}});
+			}
+		</style>
+
+		{% elif api.weather[0].main == "Snow" %}
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/snow.jpg")}});
+			}
+		</style>
+
+		{% elif api.weather[0].main == "Thunderstorm" %}
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/thunderstorm.jpg")}});
+			}
+		</style>
+
+		{% else %}
+
+		<style>
+			body {
+				background: url({{url_for("static", filename= "img/background.jpg")}});
+			}
+		</style>
+
+		{% endif%}
+	{% endif%}
+
+	</head>
+	<body>
+		<div class="container col-lg-4 col-sm-6 col-md-4 col-lg-3 shadow-lg p-3">
+			<div class="card">
+				<div class="card-header">
+					<form action="/" method="POST">
+						<input
+							class="form-control border-0 rounded-0"
+							type="text"
+							name="city"
+							placeholder="Enter a City"
+							required
+						/>
+					</form>
+				</div>
+
+				{% if api.cod == 200 %}
+
+				<div class="card-header">
+					{% if api.main.temp|round|int > 90 %}
+					<div class="temperature text-danger">
+						<img
+							src="https://openweathermap.org/img/wn/{{api.weather[0].icon}}@2x.png"
+						/>
+						{{api.main.temp|round|int}}°
+					</div>
+
+					{% else %}
+
+					<div class="temperature">
+						<img
+							src="https://openweathermap.org/img/wn/{{api.weather[0].icon}}@2x.png"
+						/>
+						{{api.main.temp|round|int}}°
+					</div>
+
+					{% endif %}
+
+					<h1>{{ api.weather[0].main }}</h1>
+					<table class="table table-sm table-borderless text-center">
+						<thead>
+							<tr>
+								<th>Hi</th>
+								<th>Lo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{api.main.temp_max|round|int}}°</td>
+								<td>{{api.main.temp_min|round|int}}°</td>
+							</tr>
+						</tbody>
+					</table>
+					<hr />
+					<table class="table table-sm table-borderless text-center">
+						<thead>
+							<tr>
+								<th>
+									<h4>{{ api.name }}, {{api.sys.country}}</h4>
+								</th>
+								<th>
+									<h4 class="text-muted">{{ date }}</h4>
+								</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+
+				{% else %}
+
+				<div class="card-header">
+					<div class="alert alert-danger">
+						<h3 class="alert-heading">
+							Invalid City
+							<hr />
+							Retry
+						</h3>
+					</div>
+				</div>
+
+				{% endif %}
+
+			</div>
+		</div>
+	</body>
+</html>

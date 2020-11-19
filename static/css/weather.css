@@ -1,0 +1,31 @@
+body {
+	font-family: sans-serif;
+	text-align: center;
+	margin: 60px;
+}
+
+h1 {
+	font-size: 48;
+	font-weight: 400;
+	text-shadow: 0 0 3px #000;
+}
+
+input[type="text"] {
+	background-color: #fff;
+}
+
+.temperature {
+	background-color: steelblue;
+	border-radius: 25px;
+	font-size: 100;
+	font-weight: 900;
+	color: #fff;
+	text-shadow: 2px 2px 5px #000;
+	margin: 10px;
+}
+
+/* th Header Cell and td Data Cell */
+th,
+td {
+	font-size: 24px;
+}

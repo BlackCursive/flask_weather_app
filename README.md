@@ -1,6 +1,5 @@
-# Flask Weather App
+# Flask Weather App [![Made with python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://github.com/BlackCursive/flask_weather_app)
 Flask Single Page - Weather App
-[![Made with python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://github.com/BlackCursive/flask_weather_app)
 
 >Flask
 
